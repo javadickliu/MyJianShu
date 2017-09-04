@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--id命名规则 acitivity+类型+识别名字-->
+    <ImageView
+        android:id="@+id/welcome_img_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp"
+        android:src="@drawable/splash_screen"/>
+
+</RelativeLayout>

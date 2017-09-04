@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recyclerview_header"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="160dp">
+
+<com.tmall.ultraviewpager.UltraViewPager
+    android:id="@+id/recyclerview_header_vp"
+    android:layout_width="wrap_content"
+    android:layout_height="140dp"
+    android:layout_margin="10dp">
+</com.tmall.ultraviewpager.UltraViewPager>
+</LinearLayout>
