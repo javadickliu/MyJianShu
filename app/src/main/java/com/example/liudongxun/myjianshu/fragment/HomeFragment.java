@@ -1,6 +1,7 @@
 package com.example.liudongxun.myjianshu.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +24,8 @@ import com.example.liudongxun.myjianshu.R;
 import com.example.liudongxun.myjianshu.contract.MyNewsContract;
 import com.example.liudongxun.myjianshu.model.HomeDatasBean;
 import com.example.liudongxun.myjianshu.presenter.NewsPresenterIm;
+import com.example.liudongxun.myjianshu.ui.HomeDetailActivity;
+import com.example.liudongxun.myjianshu.ui.WelcomeActivity;
 import com.tmall.ultraviewpager.UltraViewPager;
 
 import java.lang.invoke.MethodHandles;
@@ -53,6 +56,7 @@ RecyclerViewHeader  recyclerViewHeader;*/
     private NewsPresenterIm newsPresenterIm;
     private Handler mhandler;
     private List<String> banner_img;
+    private HomeDatasBean list;
     //================首先需要实现四个抽象方法=============
    @Override
    public int intLayoutID() {//返回跟fragment对应的布局id
@@ -84,30 +88,7 @@ RecyclerViewHeader  recyclerViewHeader;*/
 
     @Override
     public void intView() {//在这里做展示view的事情
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if(checkNet()) {//如果有网络连接就刷新数据并]
-                    Log.d("Tag-------","222222222222222");
-                    intDate();//调用retrofit发送网络请求加载数据。
-                    refreshLayout.setRefreshing(false);//关掉刷新显示
-                    Toast.makeText(getContext(),"刷新成功",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(getContext(),"网络异常哟",Toast.LENGTH_LONG).show();
-                    mhandler.postDelayed(new Runnable()//利用handler延迟开启线程，开启线程结束刷新
-                    {
-                        @Override
-                        public void run()
-                        {
-                            Log.d("Tag-------",Thread.currentThread().getName());
-                            refreshLayout.setRefreshing(false);//关掉刷新显示
-                        }
-                    }, 2000);
-                  }
-                }
-        });
-
+         setRefresh();
 
 //=================================================================
       /*  mQueue = Volley.newRequestQueue(getContext().getApplicationContext());
@@ -127,25 +108,59 @@ RecyclerViewHeader  recyclerViewHeader;*/
         jsonObjectRequest.setTag("my");
         mQueue.add(jsonObjectRequest);*/
     }
-
+   public  void setRefresh()
+   {
+       refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+           @Override
+           public void onRefresh() {
+               if(checkNet()) {//如果有网络连接就刷新数据并]
+                   Log.d("Tag-------","222222222222222");
+                   intDate();//调用retrofit发送网络请求加载数据。
+                   refreshLayout.setRefreshing(false);//关掉刷新显示
+                   Toast.makeText(getContext(),"刷新成功",Toast.LENGTH_LONG).show();
+               }
+               else {
+                   Toast.makeText(getContext(),"网络异常哟",Toast.LENGTH_LONG).show();
+                   mhandler.postDelayed(new Runnable()//利用handler延迟开启线程，开启线程结束刷新
+                   {
+                       @Override
+                       public void run()
+                       {
+                           Log.d("Tag-------",Thread.currentThread().getName());
+                           refreshLayout.setRefreshing(false);//关掉刷新显示
+                       }
+                   }, 2000);
+               }
+           }
+       });
+   }
     //================實現view接口,作用是可以讓presenter調用，裏面的實例
     @Override
     public void showInfo(HomeDatasBean list,boolean resoponseOk) {//每次调用intDta方法之后获取网络成功的回调都在这里,有个bug
-            recyclerViewAdapter=new RecyclerViewAdapter(list);//实例化的时候传入一个HomeDatasBean
-            recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.MyItemOnClickListener() {
-                @Override
-                public void myItemClick(View v, int position) {
-                    Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
-                }
-            });
-            DividerItemDecoration dd = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-            dd.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.itemdivider1));
-            recyclerView.addItemDecoration(dd);
-            recyclerView.setAdapter(recyclerViewAdapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//s
-            View view=LayoutInflater.from(getContext()).inflate(R.layout.recyclerview_header,recyclerView,false);
-            setViewPager(view);
-            recyclerViewAdapter.setmHeaderView(view);//recyrler添加header,?
+//         if(recyclerViewAdapter==null) {//第一次加载的时候才注册点击时间啊加item这种不需要反腐加载的事件
+             recyclerViewAdapter = new RecyclerViewAdapter(list);//实例化的时候传入一个HomeDatasBean
+             recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.MyItemOnClickListener() {
+                 @Override
+                 public void myItemClick(View v, int position) {
+                    Intent it=new Intent(getActivity(),HomeDetailActivity.class);
+                   // it.putExtra("newsdetail",list.getResult().getData());
+                    getActivity().startActivity(it);
+                     //  Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
+                 }
+             });
+             DividerItemDecoration dd = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+             dd.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.itemdivider1));//加载一个图片资源当分割线
+             recyclerView.addItemDecoration(dd);
+             recyclerView.setAdapter(recyclerViewAdapter);
+             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//s
+             View view = LayoutInflater.from(getContext()).inflate(R.layout.recyclerview_header, recyclerView, false);
+             setViewPager(view);
+             recyclerViewAdapter.setmHeaderView(view);//recyrler添加header,?
+          //   recyclerViewAdapter.notifyDataSetChanged();
+//         }
+//         else {
+//
+//         }
         //recyclerview放在这里一个很大的原因，因为网络请求是耗时操作，需要开启线程去工作。如果我们把recycleview的
         //加载放在fragmetn的oncreateview的intview里面里面，主线程跑到这里的adapter是没有准备好数据的，所以是空的。
         //数据要在请求完成回调oncreate方法的时候才准备完成
@@ -171,7 +186,7 @@ RecyclerViewHeader  recyclerViewHeader;*/
     public void onDestroy() {
         super.onDestroy();
     //   mQueue.cancelAll("my");
-        fixInputMethodManagerLeak(getContext());
+       fixInputMethodManagerLeak(getContext());
     }
 
 
