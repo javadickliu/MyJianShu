@@ -136,15 +136,17 @@ RecyclerViewHeader  recyclerViewHeader;*/
    }
     //================實現view接口,作用是可以讓presenter調用，裏面的實例
     @Override
-    public void showInfo(HomeDatasBean list,boolean resoponseOk) {//每次调用intDta方法之后获取网络成功的回调都在这里,有个bug
+    public void showInfo(final HomeDatasBean list,boolean resoponseOk) {//每次调用intDta方法之后获取网络成功的回调都在这里,有个bug
 //         if(recyclerViewAdapter==null) {//第一次加载的时候才注册点击时间啊加item这种不需要反腐加载的事件
              recyclerViewAdapter = new RecyclerViewAdapter(list);//实例化的时候传入一个HomeDatasBean
+
              recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.MyItemOnClickListener() {
                  @Override
                  public void myItemClick(View v, int position) {
                     Intent it=new Intent(getActivity(),HomeDetailActivity.class);
-                   // it.putExtra("newsdetail",list.getResult().getData());
+                    it.putExtra("newsdetail",list.getResult().getData().get(position).getUrl());
                     getActivity().startActivity(it);
+                     getActivity().overridePendingTransition(R.anim.activity_in,0);
                      //  Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
                  }
              });

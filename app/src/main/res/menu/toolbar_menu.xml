@@ -5,17 +5,19 @@
     <item android:id="@+id/activity_homedetail_menu1"
         android:icon="@drawable/icon_menu_shoucang"
           android:title="收藏"
-        app:showAsAction="ifRoom">
+        app:showAsAction="never">
 
     </item>
     <item android:id="@+id/activity_homedetail_menu2"
           android:icon="@drawable/icon_menu_fenxiang"
-          android:title="分享">
+          android:title="分享"
+         app:showAsAction="never">
 
     </item>
     <item android:id="@+id/activity_homedetail_menu3"
-        android:icon="@drawable/icon_menu_jubao"
+         android:icon="@drawable/icon_menu_jubao"
           android:title="举报"
+        app:showAsAction="never"
          >
     </item>
 </menu>

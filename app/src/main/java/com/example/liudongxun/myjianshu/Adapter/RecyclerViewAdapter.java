@@ -56,16 +56,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         {
             return new ViewHolder(mHeaderView);
         }
-        Log.d("test", "这里已经加载了正常的视图了");
+     //   Log.d("test", "这里已经加载了正常的视图了");
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.recylerview_item,parent,false);
         ViewHolder viewHolder=new ViewHolder(view);//创建和recycleview的item相关的布局和viewholder
         view.setOnClickListener(this);//为每个item设置监听
-        Log.d("gggggggggg", "11111111111111111");
+     //   Log.d("gggggggggg", "11111111111111111");
         return  viewHolder;
     }
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {//item的控件的事件逻辑在这里,
-        Log.d("gggggggggg", "22222222222222");
+ //       Log.d("gggggggggg", "22222222222222");
         if(getItemViewType(position)==TYPE_HEADER) {return;}
         position=position-1;//因为下标志0用来放header，所以数据下标需要减1
         Uri uri= Uri.parse(data.getResult().getData().get(position).getThumbnail_pic_s().toString());//注意这里啊，list类型的数据是怎么用的
@@ -78,7 +78,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        Log.d("gggggggggg", "33333333333333333");
+     //   Log.d("gggggggggg", "33333333333333333");
         return data.getResult().getData().size()+1;
     }
 
@@ -92,7 +92,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(View view)//是上面加載的view
         {
             super(view);
-            Log.d("gggggggggg", "4444444444444");
+        //    Log.d("gggggggggg", "4444444444444");
             if(mHeaderView==view) {return;}
             draweeView=view.findViewById(R.id.recyclerview_itme_pic_thumbnail1);
             textView_author=view.findViewById(R.id.recyclerview_itme_text_authorname);

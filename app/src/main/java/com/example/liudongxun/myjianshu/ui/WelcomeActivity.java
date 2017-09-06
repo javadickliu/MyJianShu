@@ -27,7 +27,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
        intAnimation();//实现欢迎界面图片的渐变效果，利用动
 

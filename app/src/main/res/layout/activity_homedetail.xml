@@ -1,15 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-   <android.support.v7.widget.Toolbar
-       android:id="@+id/activity_homedetail_toolbar"
-       android:layout_width="match_parent"
-       android:layout_height="50dp"
-       >
-   </android.support.v7.widget.Toolbar>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/activity_homedetail_coordina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/activity_homedetail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:elevation="4dp"
+                app:layout_scrollFlags="scroll|enterAlways"
+                >
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
-   <Button
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content" />
-</LinearLayout>
+    <ImageView
+        android:id="@+id/activity_homedetail_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/activity_homedetail_coordina"
+        android:background="@drawable/normal_line"/>
+
+    <LinearLayout
+        android:id="@+id/activity_homedetail_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+       >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          >
+          <ImageView
+              android:layout_width="20dp"
+              android:layout_height="20dp"
+              android:src="@drawable/icon_comment"
+              android:layout_margin="10dp"/>
+          <EditText
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:hint="写下你的评论"
+              android:ems="10"
+              android:maxLines="1"/>
+      </LinearLayout>
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:src="@drawable/normal_vertical_line"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/activity_homedetail_guanzhu"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:src="@drawable/icon_activity_like"
+                android:layout_margin="10dp"/>
+           <ImageView
+               android:id="@+id/activity_homedetail_share"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="25dp"
+               android:layout_margin="10dp"
+               android:src="@drawable/icon_share_new"
+               />
+
+        </LinearLayout>
+    </LinearLayout>
+        <WebView
+            android:id="@+id/activity_homedetail_webview"
+            android:layout_below="@id/activity_homedetail_line"
+            android:layout_above="@id/activity_homedetail_linearlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+            <requestFocus></requestFocus>
+        </WebView>
+
+
+
+
+
+</RelativeLayout>
