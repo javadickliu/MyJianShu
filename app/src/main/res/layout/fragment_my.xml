@@ -2,15 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
+
+  <!--  <Button
         android:id="@+id/fragment_my_test1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="写数据"/>
    <Button
+
        android:id="@+id/fragment_my_test2"
-       android:layout_width="wrap_content"
+       android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="取出数据库"/>
+       android:text="取出数据库"
+       android:background="#ffffff"/>-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/fragment_my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.Toolbar>
+    <Button
+        android:drawableLeft="@mipmap/icon_like_normal"
+        android:id="@+id/fragment_my_shouchang"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="left|center_vertical"
+        android:layout_marginLeft="10dp"
+        android:text="      收藏的文章"
+        android:background="#ffffff"/>
+    <Button
+        android:drawableLeft="@mipmap/icon_like_normal"
+        android:id="@+id/fragment_my_like"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="left|center_vertical"
+        android:text="      喜欢的文章"
+        android:layout_marginLeft="10dp"
+        android:background="#ffffff"/>
+    <Button
+        android:drawableLeft="@mipmap/icon_like_normal"
+        android:id="@+id/fragment_my_share"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="left|center_vertical"
+        android:text="      喜欢就分享吧"
+        android:layout_marginLeft="10dp"
+        android:background="#ffffff"/>
+
 
 </LinearLayout>

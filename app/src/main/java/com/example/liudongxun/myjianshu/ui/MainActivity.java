@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
            case 3:
                if(mineFragment!=null)
                {
-                   fragmentTransaction.show(guanzhuFragment);
+                   fragmentTransaction.show(mineFragment);
                }else
                {
                    mineFragment=new MineFragment();
@@ -192,6 +192,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        finish();
     }
 }
