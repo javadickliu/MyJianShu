@@ -42,10 +42,12 @@ public class HomeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homedetail);
         ButterKnife.bind(this);
-        intToolBar();
         intUrl();
         intButtom();
+        intToolBar();
+
     }
+
 
     public void intToolBar()//初始化toolbar
     {
@@ -68,19 +70,23 @@ public class HomeDetailActivity extends AppCompatActivity {
                 switch (item.getItemId())
                 {
                     case R.id.activity_homedetail_menu1:
-                        setShouCang();
+                        setDialog();
                         break;
                     case R.id.activity_homedetail_menu2:
-                        setShare();
+                        Intent it=new Intent(Intent.ACTION_SEND);
+                        it.putExtra(Intent.EXTRA_TEXT,"这是我的练习app可以到我的github上去了解哟");
+                        it.setType("text/plain");
+                        startActivity(it);
                         break;
                     case R.id.activity_homedetail_menu3:
-
+                          setToolbarReport();
                         break;
                 }
                 return true;
             }
         });
     }
+
    public  void intUrl()
    {
         Intent i=getIntent();
@@ -95,22 +101,7 @@ public class HomeDetailActivity extends AppCompatActivity {
        img_guanzhu.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               AlertDialog.Builder dialog=new AlertDialog.Builder(HomeDetailActivity.this);
-               dialog.setTitle("确定是否要收藏此文章");
-               dialog.setMessage("提醒:再次点击可取消收藏");
-               dialog.setNegativeButton("取消收藏", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialogInterface, int i) {
-                       Toast.makeText(HomeDetailActivity.this,"取消成功",Toast.LENGTH_SHORT).show();
-                   }
-               });
-               dialog.setPositiveButton("确定收藏", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialogInterface, int i) {
-                       Toast.makeText(HomeDetailActivity.this,"收藏成功",Toast.LENGTH_SHORT).show();
-                   }
-               });
-               dialog.show();
+                setDialog();
            }
        });
    }
@@ -124,6 +115,30 @@ public class HomeDetailActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+    }
+    private void setDialog()//设置dialog的点击事件
+    {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(HomeDetailActivity.this);
+        dialog.setTitle("确定是否要收藏此文章");
+        dialog.setMessage("提醒:再次点击可取消收藏");
+        dialog.setNegativeButton("取消收藏", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(HomeDetailActivity.this,"取消成功",Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.setPositiveButton("确定收藏", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(HomeDetailActivity.this,"收藏成功",Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
+    }
+    public void setToolbarReport()//设置toolbar的举报item的点击后触发的事件
+    {
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

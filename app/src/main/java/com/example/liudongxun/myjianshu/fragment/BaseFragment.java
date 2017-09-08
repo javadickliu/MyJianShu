@@ -17,6 +17,7 @@ import com.example.liudongxun.myjianshu.presenter.NewsPresenterIm;
 import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 /**
  * Created by liudongxun on 2017/08/27.
@@ -43,6 +44,8 @@ public abstract class BaseFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view=inflater.inflate(intLayoutID(),container,false);
         ButterKnife.bind(this,view);
+        Realm.init(getActivity());//realm数据库
+
         intVareiables();
         intDate();
         intView();
@@ -72,6 +75,5 @@ public abstract class BaseFragment extends Fragment{
         super.onDestroy();
         RefWatcher refWatcher= MyApplication.getRefWatcher(getActivity());
         refWatcher.watch(this);
-       
     }
 }
