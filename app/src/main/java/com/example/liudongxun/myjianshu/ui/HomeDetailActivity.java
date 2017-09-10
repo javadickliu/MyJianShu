@@ -138,13 +138,13 @@ public class HomeDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 RealmConfiguration config=new RealmConfiguration.Builder().name("data_test2")
+                        .deleteRealmIfMigrationNeeded()
                         .build();
                 realm=Realm.getInstance(config);
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
                         RealmUser realmUser=realm.where(RealmUser.class).equalTo("newsUrl",getIntent().getStringExtra("newsdetail")).findFirst();
-               //         Log.d("database",realmUser.getNewsUrl());
                         realmUser.deleteFromRealm();
                     }
                 });
@@ -157,6 +157,7 @@ public class HomeDetailActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //==================添加数据
                 RealmConfiguration config=new RealmConfiguration.Builder().name("data_test2")
+                        .deleteRealmIfMigrationNeeded()
                                            .build();
                  realm=Realm.getInstance(config);
                 RealmResults<RealmUser> result=realm.where(RealmUser.class).findAll();

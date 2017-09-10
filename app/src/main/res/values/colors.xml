@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBottom">#ffffff</color>
+    <color name="myfragment_press">#fafafa</color>
+    <color name="myfragment_normal">#ffffff</color>
 </resources>

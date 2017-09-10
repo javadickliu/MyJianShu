@@ -45,7 +45,6 @@ public abstract class BaseFragment extends Fragment{
        View view=inflater.inflate(intLayoutID(),container,false);
         ButterKnife.bind(this,view);
         Realm.init(getActivity());//realm数据库
-
         intVareiables();
         intDate();
         intView();

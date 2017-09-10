@@ -36,7 +36,10 @@
             android:parentActivityName=".ui.MainActivity"
             >
         </activity>
+        <activity android:name=".ui.MyShouChangActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+        </activity>
     </application>
 
 </manifest>
